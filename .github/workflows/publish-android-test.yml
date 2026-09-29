@@ -1,0 +1,52 @@
+name: Publish Android Test Update
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/publish-android-test.yml"
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-test-publish
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout preview repository
+        uses: actions/checkout@v6
+
+      - name: Download Android test artifact
+        run: |
+          curl -L --fail --retry 3 "https://sdmntprukwest.oaiusercontent.com/files/00000000-1e90-8243-8673-d348bafd6fdc/raw?se=2026-09-29T12%3A37%3A04Z&sp=r&sv=2026-02-06&sr=b&scid=bc43de0e-f62d-5bcd-9bed-931b0c28b528&skoid=40ce4b34-a373-4a62-b0bf-44befe221915&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-29T06%3A36%3A16Z&ske=2026-09-30T06%3A36%3A16Z&sks=b&skv=2026-02-06&sig=nCYkzo3pjpG7ysP5WKHY/iGpV8aArCtFs6qf4JRCfAQ%3D" -o android-test.zip
+          mkdir -p extracted site
+          unzip -q android-test.zip -d extracted
+          APK_PATH="$(find extracted -type f -name '*.apk' | head -n 1)"
+          test -n "$APK_PATH"
+          cp "$APK_PATH" site/EcloMag-test.apk
+
+      - name: Write update manifest
+        run: |
+          SHA256="$(sha256sum site/EcloMag-test.apk | awk '{print $1}')"
+          cat > site/latest.json <<EOF
+          {
+            "version_code": 1017,
+            "version_name": "0.1.17-test",
+            "apk_url": "https://raw.githubusercontent.com/MaximeBicc/Eclo-mag-preview/android-test/EcloMag-test.apk",
+            "sha256": "$SHA256"
+          }
+          EOF
+
+      - name: Publish Android update channel
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: android-test
+          force_orphan: true
