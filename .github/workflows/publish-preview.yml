@@ -1,0 +1,33 @@
+name: Publish Eclo Mag Preview
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout preview repository
+        uses: actions/checkout@v6
+
+      - name: Download compiled Godot preview
+        run: |
+          curl -L --fail --retry 3 "https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-c268-8210-8a23-6c66c7f59efe/raw?se=2026-09-29T11%3A41%3A59Z&sp=r&sv=2026-02-06&sr=b&scid=0a28df06-046b-5de3-851b-a402ee100c13&skoid=40ce4b34-a373-4a62-b0bf-44befe221915&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-29T05%3A48%3A03Z&ske=2026-09-30T05%3A48%3A03Z&sks=b&skv=2026-02-06&sig=1vRrZ1P/VrdtxXiURjbw%2BsVe9fUrY18BDT2wWG69Eac%3D" -o preview.zip
+          mkdir -p extracted site
+          unzip -q preview.zip -d extracted
+          cp -R extracted/Web/. site/
+          touch site/.nojekyll
+
+      - name: Publish compiled site to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          force_orphan: true
