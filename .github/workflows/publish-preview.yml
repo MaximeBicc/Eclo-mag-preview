@@ -18,7 +18,7 @@ jobs:
 
       - name: Download compiled Godot preview
         run: |
-          curl -L --fail --retry 3 "https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-c268-8210-8a23-6c66c7f59efe/raw?se=2026-09-29T11%3A41%3A59Z&sp=r&sv=2026-02-06&sr=b&scid=0a28df06-046b-5de3-851b-a402ee100c13&skoid=40ce4b34-a373-4a62-b0bf-44befe221915&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-29T05%3A48%3A03Z&ske=2026-09-30T05%3A48%3A03Z&sks=b&skv=2026-02-06&sig=1vRrZ1P/VrdtxXiURjbw%2BsVe9fUrY18BDT2wWG69Eac%3D" -o preview.zip
+          curl -L --fail --retry 3 "https://sdmntprnortheu.oaiusercontent.com/files/00000000-35a0-81f4-9fb4-2f190c397524/raw?se=2026-09-29T11%3A57%3A02Z&sp=r&sv=2026-02-06&sr=b&scid=0f8282d3-91ca-5b2a-a13b-99cc5775ddf3&skoid=40ce4b34-a373-4a62-b0bf-44befe221915&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-29T03%3A45%3A56Z&ske=2026-09-30T03%3A45%3A56Z&sks=b&skv=2026-02-06&sig=Papu9ez3fztS3nw84cp6guOK410e0EmKaAuzcnpuuTE%3D" -o preview.zip
           mkdir -p extracted site
           unzip -q preview.zip -d extracted
           cp -R extracted/Web/. site/
