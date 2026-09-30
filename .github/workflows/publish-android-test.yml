@@ -24,7 +24,7 @@ jobs:
 
       - name: Download Android test artifact
         run: |
-          curl -L --fail --retry 3 "https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-1390-820a-a42e-6da0d9fe8b00/raw?se=2026-09-29T14%3A50%3A07Z&sp=r&sv=2026-02-06&sr=b&scid=ed8ce440-0dfd-5450-b1de-36981b53371e&skoid=40ce4b34-a373-4a62-b0bf-44befe221915&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-29T07%3A19%3A02Z&ske=2026-09-30T07%3A19%3A02Z&sks=b&skv=2026-02-06&sig=Qq1mL4vFL490G%2BbBbsPWRsluZp2ieo57zio6RRGPJdI%3D" -o android-test.zip
+          curl -L --fail --retry 3 "https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-7c20-8210-9166-c8e44a3891ef/raw?se=2026-09-30T06%3A52%3A40Z&sp=r&sv=2026-02-06&sr=b&scid=4df8bd43-48b8-5652-a803-9a6177a7567b&skoid=40ce4b34-a373-4a62-b0bf-44befe221915&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-30T02%3A54%3A26Z&ske=2026-10-01T02%3A54%3A26Z&sks=b&skv=2026-02-06&sig=Natx5MbUdSK5sNy8HrQZkTXukacbEvKYkFTLrkfJAao%3D" -o android-test.zip
           mkdir -p extracted site
           unzip -q android-test.zip -d extracted
           APK_PATH="$(find extracted -type f -name '*.apk' | head -n 1)"
@@ -36,8 +36,8 @@ jobs:
           SHA256="$(sha256sum site/EcloMag-test.apk | awk '{print $1}')"
           cat > site/latest.json <<EOF
           {
-            "version_code": 1045,
-            "version_name": "0.1.45-test",
+            "version_code": 1051,
+            "version_name": "0.1.51-test",
             "apk_url": "https://raw.githubusercontent.com/MaximeBicc/Eclo-mag-preview/android-test/EcloMag-test.apk",
             "sha256": "$SHA256"
           }
