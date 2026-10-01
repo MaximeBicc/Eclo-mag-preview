@@ -1,9 +1,9 @@
 {
-  "version_code": 1068,
-  "version_name": "0.1.68-test",
+  "version_code": 1069,
+  "version_name": "0.1.69-test",
   "apk_url": "https://raw.githubusercontent.com/MaximeBicc/Eclo-mag-preview/android-test/EcloMag-test.apk",
-  "sha256": "082180525f1b21107e50f32d7420f0cb4ff04eaa722dca46b00bac705c22408c",
-  "windows_url": "https://raw.githubusercontent.com/MaximeBicc/Eclo-mag-preview/android-test/EcloMag-Windows-0.1.68-test.zip",
-  "windows_sha256": "bdec1e89a3dba9bb1430b5fb78b9abbdd5f431de98dbb71dc040c74138ad18c5",
-  "source_commit": "94c4111ceb67345a3b46e113d998e3003d4b997d"
+  "sha256": "774f60df90d7168d7c1418af25f6db7af28eb19f7ef3a407bfdf33ec0f139802",
+  "windows_url": "https://raw.githubusercontent.com/MaximeBicc/Eclo-mag-preview/android-test/EcloMag-Windows-0.1.69-test.zip",
+  "windows_sha256": "0899726280f1f2f00f50a4af480498c0caa04bfc05022443a43bb61b621fb48a",
+  "source_commit": "f9692adf826a3b51826f8c0292b601a7975e061f"
 }
